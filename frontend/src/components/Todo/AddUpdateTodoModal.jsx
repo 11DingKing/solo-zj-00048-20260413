@@ -52,7 +52,7 @@ export const AddUpdateTodoModal = ({
         title: editable ? "Todo Updated" : "Todo Added",
         status: "success",
         isClosable: true,
-        diration: 1500,
+        duration: 1500,
       });
       onSuccess();
       onClose();
@@ -62,7 +62,7 @@ export const AddUpdateTodoModal = ({
         title: "Something went wrong. Please try again.",
         status: "error",
         isClosable: true,
-        diration: 1500,
+        duration: 1500,
       });
     }
   };
@@ -70,7 +70,7 @@ export const AddUpdateTodoModal = ({
   return (
     <Box {...rest}>
       <Button w="100%" colorScheme="green" onClick={onOpen}>
-        {editable ? "UPDATE FODO" : "ADD FODO"}
+        {editable ? "UPDATE TODO" : "ADD TODO"}
       </Button>
       <Modal
         closeOnOverlayClick={false}
@@ -82,7 +82,7 @@ export const AddUpdateTodoModal = ({
         <ModalOverlay />
         <form onSubmit={handleSubmit(onSubmit)}>
           <ModalContent>
-            <ModalHeader>{editable ? "Update Fodo" : "ADD FODO"}</ModalHeader>
+            <ModalHeader>{editable ? "Update Todo" : "ADD TODO"}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <FormControl isInvalid={errors.title}>
@@ -114,7 +114,6 @@ export const AddUpdateTodoModal = ({
                   rows={5}
                   placeholder="Add description...."
                   background={useColorModeValue("gray.300", "gray.600")}
-                  type="test"
                   variant="filled"
                   size="lg"
                   mt={6}

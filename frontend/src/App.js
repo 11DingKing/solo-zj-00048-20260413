@@ -12,6 +12,8 @@ import { Register } from "./components/Auth/Register";
 import { NavBar } from "./components/Navbar/NavBar";
 import { TodoDetail } from "./components/Todo/TodoDetail";
 import { TodoList } from "./components/Todo/TodoList";
+import { SharedTodoList } from "./components/Todo/SharedTodoList";
+import { SharedTodoDetail } from "./components/Todo/SharedTodoDetail";
 import { AuthConsumer, AuthProvider } from "./context/JWTAuthContext";
 
 function App() {
@@ -67,6 +69,22 @@ function App() {
                       element={
                         <Authenticated>
                           <TodoDetail />
+                        </Authenticated>
+                      }
+                    />
+                    <Route
+                      path="/shared"
+                      element={
+                        <Authenticated>
+                          <SharedTodoList />
+                        </Authenticated>
+                      }
+                    />
+                    <Route
+                      path="/shared/:todoId"
+                      element={
+                        <Authenticated>
+                          <SharedTodoDetail />
                         </Authenticated>
                       }
                     />

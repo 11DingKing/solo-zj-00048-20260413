@@ -6,11 +6,13 @@ import {
   Text,
   useColorModeValue,
   useToast,
+  Stack,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../services/axios";
 import { AddUpdateTodoModal } from "./AddUpdateTodoModal";
+import { ShareTodoModal } from "./ShareTodoModal";
 
 export const TodoDetail = () => {
   const [todo, setTodo] = useState({});
@@ -40,7 +42,7 @@ export const TodoDetail = () => {
       });
   };
 
-  const delateTodo = () => {
+  const deleteTodo = () => {
     setLoading(true);
     axiosInstance
       .delete(`/todo/${todoId}`)
@@ -49,17 +51,17 @@ export const TodoDetail = () => {
           title: "Todo deleted successfully",
           status: "success",
           isClosable: true,
-          diration: 1500,
+          duration: 1500,
         });
         navigate("/");
       })
       .catch((err) => {
         console.error(err);
         toast({
-          title: "Could'nt delete todo",
+          title: "Couldn't delete todo",
           status: "error",
           isClosable: true,
-          diration: 2000,
+          duration: 2000,
         });
       })
       .finally(() => setLoading(false));
@@ -104,24 +106,26 @@ export const TodoDetail = () => {
         <Text bg="gray.500" mt={2} p={2} rounded="lg">
           {todo.description}
         </Text>
-        <AddUpdateTodoModal
-          my={3}
-          editable={true}
-          defaultValues={{
-            title: todo.title,
-            description: todo.description,
-            status: todo.status,
-          }}
-          onSuccess={fetchTodo}
-        />
-        <Button
-          isLoading={loading}
-          colorScheme="red"
-          width="100%"
-          onClick={delateTodo}
-        >
-          Delete
-        </Button>
+        <Stack spacing={3} mt={4}>
+          <AddUpdateTodoModal
+            editable={true}
+            defaultValues={{
+              title: todo.title,
+              description: todo.description,
+              status: todo.status,
+            }}
+            onSuccess={fetchTodo}
+          />
+          <ShareTodoModal todoId={todo.todo_id} onSuccess={fetchTodo} />
+          <Button
+            isLoading={loading}
+            colorScheme="red"
+            width="100%"
+            onClick={deleteTodo}
+          >
+            Delete
+          </Button>
+        </Stack>
       </Container>
     </>
   );

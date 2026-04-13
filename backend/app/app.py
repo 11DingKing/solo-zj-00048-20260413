@@ -7,6 +7,7 @@ from app.api.api_v1.router import router
 from app.core.config import settings
 from app.models.todo_model import Todo
 from app.models.user_model import User
+from app.models.todo_share_model import TodoShare
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -33,7 +34,8 @@ async def app_init():
         database=db_client,
         document_models= [
             User,
-            Todo
+            Todo,
+            TodoShare
         ]
     )
     

@@ -46,7 +46,7 @@ export const TodoList = () => {
       ) : (
         <Box mt={6}>
           {todos?.map((todo) => (
-            <TodoCard todo={todo} key={todo.id} />
+            <TodoCard todo={todo} key={todo.todo_id} />
           ))}
         </Box>
       )}
